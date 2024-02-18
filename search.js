@@ -1,8 +1,10 @@
+
+
 class TextBox{
     constructor(){
         this.label = document.createElement("label");
-        this.label.textContent = "Search for a Word";
-        
+        this.label.textContent = searchLabel;
+        this.break = document.createElement("br")
         this.text_box =  document.createElement("input");
         this.text_box.id = "wordbox";
         this.text_box.type = "text";
@@ -10,6 +12,7 @@ class TextBox{
         document.body.appendChild(this.label);
         
         document.body.appendChild(this.text_box);
+        document.body.appendChild(this.break);
     }
 }
 
@@ -17,6 +20,8 @@ class defAreaBox{
     constructor(){
         this.defintion_box = document.createElement("textarea")
         this.defintion_box.id = "defintion-box"
+        this.defintion_box.style.width = 15 + "em"
+        this.defintion_box.style.height = 5 + "em"
         this.defintion_box.disabled = true
         this.defintion_box.oninput = () => getvalue()
         this.defintion_box.style.backgroundColor = "skyblue"
@@ -75,6 +80,7 @@ function requestDefintion(){
 
     
 }
+
 
 let searchTextBox = new TextBox();
 

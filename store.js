@@ -1,15 +1,15 @@
 class TextBox{
     constructor(){
         this.label = document.createElement("label");
-        this.label.textContent = "Word";
-        
+        this.label.textContent = addLabel;
+        this.break = document.createElement("br")
         this.word_box =  document.createElement("input");
         this.word_box.id = "wordbox";
         this.word_box.type = "text";
         this.word_box.onchange = this.getWord()
         document.body.appendChild(this.label);
-        
         document.body.appendChild(this.word_box);
+        document.body.appendChild(this.break);
     }
 
     getWord() {
@@ -21,7 +21,10 @@ class AreaBox{
     constructor(){
         this.defintion_box = document.createElement("textarea")
         this.defintion_box.id = "defintionarea"
+        this.defintion_box.placeholder = definitionpalceholder
         this.defintion_box.style.backgroundColor = "skyblue"
+        this.defintion_box.style.width = 15 + "em"
+        this.defintion_box.style.height = 5 + "em"
         document.body.appendChild(this.defintion_box)
     }
 }
@@ -30,7 +33,7 @@ class submitButton{
     constructor(value){
         this.submitBtn = document.createElement("button");
         this.submitBtn.id = "submit"
-        this.submitBtn.textContent = "submit"
+        this.submitBtn.textContent = submitButtonDesc
         this.submitBtn.value = value
         this.submitBtn.style.color = "black"
         this.submitBtn.style.backgroundColor = "yellow"
@@ -92,7 +95,10 @@ function sendDefintion2(){
         console.error('There was a problem with your fetch operation:', error);
       });
 }
+let br = document.createElement("br")
 let searchTextBox = new TextBox();
+document.body.appendChild(br)
 let defintionAreaBox = new AreaBox();
+document.body.appendChild(br)
 let submitBtn = new submitButton();
 
