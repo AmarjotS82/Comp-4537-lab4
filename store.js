@@ -69,7 +69,7 @@ function sendDefintion(){
     const definition = document.getElementById("defintionarea").value
     console.log("word: " + word);
     console.log("def: " + definition);
-    if(word != "" && isNaN(word) && !containsNumbers){
+    if(word != "" && isNaN(word) && !containsNumbers(word) && definition != "" && isNaN(definition) && !containsNumbers(definition)){
       console.log("sending: " + word + " " + definition);
       document.getElementById("error").textContent = ""
       xhr.open("POST", "https://comp-4537-lab4-eight.vercel.app/dictionary/writeWord", true)

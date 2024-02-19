@@ -59,7 +59,7 @@ function requestDefintion(){
         
         //gotten from GPT isNan function checks to see if string can be converted to number && !isNaN(word)
   
-        if(word != "" && isNaN(word) && !containsNumbers){
+        if(word != "" && isNaN(word) && !containsNumbers(word)){
             console.log("seraching for: " + word);
             xhr.open("GET", "https://comp-4537-lab4-eight.vercel.app/dictionary?word=" + word, true)
             xhr.send()
