@@ -46,59 +46,66 @@ class submitButton{
     }
 }
 
+  //funciton gotten from ChatGPT to help validate numbers in between the letters
+  function containsNumbers(inputString) {
+    // Regular expression to match any digit character
+    const regex = /\d/;
+    // Use the test method of the regular expression to check if the string contains any digit character
+    return regex.test(inputString);
+}
+
+class errorMessageParagraph{
+  constructor(){
+    this.para = document.createElement("p");
+    this.para.id = "error"
+    this.para.textContent = ""
+    document.body.appendChild(this.para);
+}
+}
+
 function sendDefintion(){
     const xhr = new XMLHttpRequest();
     const word = document.getElementById("wordbox").value
     const definition = document.getElementById("defintionarea").value
     console.log("word: " + word);
     console.log("def: " + definition);
-    xhr.open("POST", "https://comp-4537-lab4-eight.vercel.app/dictionary/writeWord", true)
-    xhr.setRequestHeader("Content-Type", "application/json")
-    
-    xhr.onreadystatechange = () =>{
-        if (xhr.readyState === 4){
-            if(xhr.status == 200){
-                document.getElementById("defintionarea").value = xhr.responseText
-            }
-        } else{
-            document.getElementById("defintionarea").value = "Error can't find word in dictionary"
-        }
+    if(word != "" && isNaN(word) && !containsNumbers){
+      console.log("sending: " + word + " " + definition);
+      document.getElementById("error").textContent = ""
+      xhr.open("POST", "https://comp-4537-lab4-eight.vercel.app/dictionary/writeWord", true)
+      xhr.setRequestHeader("Content-Type", "application/json")
+      
+      xhr.onreadystatechange = () =>{
+          if (xhr.readyState === 4){
+              if(xhr.status == 200){
+                  document.getElementById("defintionarea").value = xhr.responseText
+              }
+          } else{
+              document.getElementById("defintionarea").value = "Error can't find word in dictionary"
+          }
+      }
+      
+      xhr.send(JSON.stringify({
+        word: word,
+        definition: definition
+      }))
+    }else{
+      if(word == "" || definition == ""){
+        document.getElementById("error").textContent = emptyStringErrorMessage
+      }else{
+          document.getElementById("error").textContent = numberErrorMessage
+      }
     }
     
-    xhr.send(JSON.stringify({
-      word: word,
-      definition: definition
-    }))
 }
 
-function sendDefintion2(){
-    fetch('/dictionary/writeWord', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          word: 'test',
-          definition: 'a test of skillls'
-        })
-      })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.text();
-      })
-      .then(data => {
-        console.log(data); // Process response data here
-      })
-      .catch(error => {
-        console.error('There was a problem with your fetch operation:', error);
-      });
-}
+
 let br = document.createElement("br")
 let searchTextBox = new TextBox();
 
 let defintionAreaBox = new AreaBox();
 document.body.appendChild(br)
 let submitBtn = new submitButton();
+
+let error_message = new errorMessageParagraph();
 
