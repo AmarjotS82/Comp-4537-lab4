@@ -71,7 +71,7 @@ function requestDefintion(){
                         console.log("s: " + JSONObj["success"])
                         console.log("def: " + JSONObj["definition"])
                         let defintion = JSONObj["definition"]
-                        let customized_defintion = defintion.replace("Word", word);
+                        let customized_defintion = requestNum + JSONObj["numRequests"] +  definition + defintion.replace("Word", word);
                         document.getElementById("defintion-box").value = customized_defintion
                     }
                 } else{

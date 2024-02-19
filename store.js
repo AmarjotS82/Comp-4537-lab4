@@ -78,7 +78,11 @@ function sendDefintion(){
       xhr.onreadystatechange = () =>{
           if (xhr.readyState === 4){
               if(xhr.status == 200){
-                  document.getElementById("defintionarea").value = xhr.responseText
+                const JSONObj = JSON.parse(xhr.response)
+                console.log(JSONObj)
+                let custom_response = requestNum + JSONObj["numRequests"] + space + JSONObj["message"].replace("Word", word);
+                  document.getElementById("defintionarea").value = JSONObj["message"].replace("Word", word)
+                  document.getElementById("error").textContent = custom_response 
               }
           } else{
               document.getElementById("defintionarea").value = "Error can't find word in dictionary"
