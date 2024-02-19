@@ -97,7 +97,7 @@ function sendDefintion2(){
 }
 let br = document.createElement("br")
 let searchTextBox = new TextBox();
-document.body.appendChild(br)
+
 let defintionAreaBox = new AreaBox();
 document.body.appendChild(br)
 let submitBtn = new submitButton();
